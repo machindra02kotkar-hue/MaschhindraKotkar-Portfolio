@@ -1,0 +1,2 @@
+.toptrip-brand { display: flex; align-items: center; gap: 8px; }
+.toptrip-brand img { width: 28px; height: 28px; object-fit: contain; }
