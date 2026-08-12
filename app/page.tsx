@@ -29,10 +29,26 @@ export default function Home() {
         <ChapterMba />
         <ChapterWildHeart />
         <ChapterToday />
-        <section className="next-chapter" id="contact">
-          <span id="resume">Let&apos;s connect</span><h2>Let&apos;s build something meaningful.</h2>
-          <a className="contact-link" href="mailto:hello@maschhindra.com">Let&apos;s build something meaningful →</a>
-        </section>
+<section className="next-chapter" id="contact">
+  <span id="resume">Let&apos;s connect</span>
+  <h2>Let&apos;s build something meaningful.</h2>
+
+  <a
+    className="contact-link"
+    href="mailto:machindra02kotkar@gmail.com"
+  >
+    Email me →
+  </a>
+
+  <a
+    className="contact-link"
+    href="https://wa.me/917448073402"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    WhatsApp me →
+  </a>
+</section>
       </main>
     </SmoothScroll>
   );
