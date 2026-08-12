@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { DM_Mono, Manrope } from "next/font/google";
 import "./globals.css";
 import "./toptrip.css";
@@ -17,5 +18,30 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={`${display.variable} ${body.variable}`} suppressHydrationWarning><body suppressHydrationWarning>{children}</body></html>;
+return (
+  <html
+    lang="en"
+    className={`${display.variable} ${body.variable}`}
+    suppressHydrationWarning
+  >
+    <Script
+      src="https://www.googletagmanager.com/gtag/js?id=G-S1DR6B8R5H"
+      strategy="afterInteractive"
+    />
+
+    <Script id="google-analytics" strategy="afterInteractive">
+      {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-S1DR6B8R5H');
+      `}
+    </Script>
+
+    <body suppressHydrationWarning>
+      {children}
+    </body>
+  </html>
+);
 }
