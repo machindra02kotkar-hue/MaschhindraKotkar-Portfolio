@@ -28,3 +28,9 @@ a { color: inherit; text-decoration: none; }
 .contact-link:hover {
   filter: brightness(70%);
 }
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}

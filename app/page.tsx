@@ -33,6 +33,7 @@ export default function Home() {
   <span id="resume">Let&apos;s connect</span>
   <h2>Let&apos;s build something meaningful.</h2>
 
+<div className="contact-links">
   <a
     className="contact-link"
     href="mailto:machindra02kotkar@gmail.com"
@@ -48,6 +49,7 @@ export default function Home() {
   >
     WhatsApp me →
   </a>
+</div>
 </section>
       </main>
     </SmoothScroll>
