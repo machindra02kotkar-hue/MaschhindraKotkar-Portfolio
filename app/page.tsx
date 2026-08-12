@@ -38,7 +38,7 @@ export default function Home() {
     className="contact-link"
     href="mailto:machindra02kotkar@gmail.com"
   >
-    Email me →
+    Email →
   </a>
 
   <a
@@ -47,7 +47,7 @@ export default function Home() {
     target="_blank"
     rel="noopener noreferrer"
   >
-    WhatsApp me →
+    WhatsApp →
   </a>
 </div>
 </section>
