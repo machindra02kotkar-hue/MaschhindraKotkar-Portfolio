@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import { GoaProofOfWork } from "./GoaProofOfWork";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,6 +29,7 @@ export function ChapterGoaTractors() {
     <div className="goa-top"><span className="goa-label">Chapter 05 / 2022–2024</span><h2 className="goa-title">Turning Strategy<br />Into Results.</h2><p className="goa-copy">At Goa Tractors, ideas met the real world: audiences, budgets, campaigns, leads, sales, and accountability.</p></div>
     <div className="campaigns"><article className="campaign-card"><span>01 / Generator campaign</span><h3>My first major marketing campaign.</h3><p>From campaign concept to execution, the work proved that strategy becomes meaningful when it creates business impact.</p></article><article className="campaign-card"><span>02 / Sher Tiller</span><h3>The campaign became so successful, we had to pause it.</h3><p>Demand outpaced the team&apos;s ability to respond—then the campaign returned and generated more leads.</p></article><article className="campaign-card"><span>03 / Creator campaign</span><h3>Content designed to perform.</h3><p>Influencer-led communication helped build stronger engagement than competing content.</p></article></div>
     <div className="results">{results.map(([number, label]) => <div className="result-card" key={number}><strong>{number}</strong><span>{label}</span></div>)}</div>
+    <div style={{ marginTop: "clamp(100px, 16vh, 170px)" }}><GoaProofOfWork /></div>
     <p className="goa-quote">Marketing isn&apos;t about creating content.<br /><em>It&apos;s about creating impact.</em></p>
   </section>;
 }
