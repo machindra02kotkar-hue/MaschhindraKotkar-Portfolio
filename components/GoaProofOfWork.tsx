@@ -72,13 +72,6 @@ const campaigns: Campaign[] = [
   },
 ];
 
-const impact = [
-  ["₹10L+", "Sales from the generator campaign"],
-  ["250+", "Leads from the first Sher Tiller run"],
-  ["150+", "Additional leads after the relaunch"],
-  ["40%", "Higher views than competitors"],
-];
-
 function CampaignEmbed({ campaign }: { campaign: Campaign }) {
   const renderEmbed = (kind: Campaign["embed"], href: string) => {
     if (kind === "instagram") {
@@ -144,13 +137,38 @@ export function GoaProofOfWork() {
       scrollTrigger: { trigger: section, start: "top 78%", toggleActions: "play none none reverse" },
     });
 
-    gsap.from(section.querySelector(`.${styles.revenue}`), {
-      x: 70,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-      scrollTrigger: { trigger: section.querySelector(`.${styles.topGrid}`), start: "top 80%", toggleActions: "play none none reverse" },
-    });
+    const revenue = section.querySelector(`.${styles.revenue}`);
+    const revenueNumber = section.querySelector(`.${styles.revenue} > strong`);
+    if (revenue) {
+      gsap.from(revenue, {
+        y: 70,
+        x: 70,
+        opacity: 0,
+        scale: 0.94,
+        duration: 1.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: revenue,
+          start: "top 82%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      if (revenueNumber) {
+        gsap.from(revenueNumber, {
+          y: 35,
+          opacity: 0,
+          delay: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: revenue,
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+    }
 
     gsap.from(section.querySelectorAll(`.${styles.card}`), {
       y: 90,
@@ -160,15 +178,6 @@ export function GoaProofOfWork() {
       duration: 0.9,
       ease: "power3.out",
       scrollTrigger: { trigger: section.querySelector(`.${styles.grid}`), start: "top 84%", toggleActions: "play none none reverse" },
-    });
-
-    gsap.from(section.querySelectorAll(`.${styles.impactItem}`), {
-      y: 55,
-      opacity: 0,
-      stagger: 0.1,
-      duration: 0.7,
-      ease: "power3.out",
-      scrollTrigger: { trigger: section.querySelector(`.${styles.impact}`), start: "top 86%", toggleActions: "play none none reverse" },
     });
 
     section.querySelectorAll(`.${styles.card}`).forEach((card) => {
@@ -220,17 +229,6 @@ export function GoaProofOfWork() {
               </div>
             </div>
           </article>
-        ))}
-      </div>
-
-      <div className={styles.impact}>
-        <div className={styles.impactIntro}><span>IMPACT</span><strong>AT A GLANCE</strong></div>
-        {impact.map(([number, label], index) => (
-          <div className={styles.impactItem} key={number}>
-            <span className={styles.impactIndex}>0{index + 1}</span>
-            <strong>{number}</strong>
-            <span>{label}</span>
-          </div>
         ))}
       </div>
     </div>
