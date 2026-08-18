@@ -9,7 +9,7 @@ import styles from "./GoaProofOfWork.module.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const campaigns = [
-  { number: "01", title: "Generator Campaign", result: "₹10 lakh+ in sales within three months of joining.", href: "https://www.facebook.com/100067240053517/posts/588838653367465/?app=fbl", mark: "₹10L+", platform: "FACEBOOK", accent: "SALES IMPACT", featured: true },
+  { number: "01", title: "Generator Campaign", result: "₹10 lakh+ in sales within three months of joining.", href: "https://www.facebook.com/100067240053517/posts/588838653367465/?app=fbl", mark: "₹10L+", platform: "FACEBOOK", accent: "SALES IMPACT" },
   { number: "02", title: "Sher Tiller — Lead Campaign", result: "250+ leads in the first run. The response became more than the team could immediately follow up with, so I took the campaign down and relaunched it after one week — generating 150+ additional leads.", href: "https://www.facebook.com/goatractors.in/videos/672304788044890/?app=fbl", mark: "250+", platform: "FACEBOOK", accent: "LEAD GENERATION" },
   { number: "03", title: "Scratch Card Campaign", result: "Planned and executed for South Maharashtra; the promotion successfully drove sales.", href: "https://www.facebook.com/goatractors.in/videos/259687266402530/?app=fbl", mark: "SALES", platform: "FACEBOOK", accent: "SOUTH MAHARASHTRA" },
   { number: "04", title: "Sher + STIHL Tiller Campaign", result: "Planned and executed for South Maharashtra; generated a strong response and drove sales.", href: "https://www.facebook.com/goatractors.in/videos/1018698946663863/?app=fbl", mark: "SALES", platform: "FACEBOOK", accent: "SOUTH MAHARASHTRA" },
@@ -99,7 +99,7 @@ export function GoaProofOfWork() {
 
       <div className={styles.grid}>
         {campaigns.map((campaign) => (
-          <article className={`${styles.card} ${campaign.featured ? styles.featured : ""}`} key={campaign.number}>
+          <article className={styles.card} key={campaign.number}>
             <div className={styles.media}>
               <div className={styles.mediaInner}>
                 <span className={styles.platform}>{campaign.platform}</span>
