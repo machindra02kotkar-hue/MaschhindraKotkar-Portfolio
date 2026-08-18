@@ -7,5 +7,3 @@
 html { background: #03061b; scroll-behavior: auto; }
 body { margin: 0; background: #03061b; color: #edf6ff; font-family: var(--font-body), sans-serif; }
 a { color: inherit; text-decoration: none; }
-
-/* Proof-of-work styles are intentionally kept in a separate component stylesheet file for now. */
