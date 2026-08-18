@@ -1,0 +1,22 @@
+/* Goa Tractors proof-of-work cards */
+.goa-proof { width: min(100%, 1120px); margin: 0 auto; }
+.goa-proof-intro { margin-bottom: 42px; }
+.goa-proof-kicker { display: block; margin-bottom: 12px; font-family: var(--font-display); font-size: 11px; letter-spacing: .17em; text-transform: uppercase; color: #8ee8ff; }
+.goa-proof-title { margin: 0; max-width: 780px; font-family: var(--font-display); font-size: clamp(2.7rem, 6vw, 6.5rem); font-weight: 400; line-height: .88; letter-spacing: -.08em; }
+.goa-proof-copy { max-width: 620px; margin: 22px 0 0; color: #a9cbe8; line-height: 1.65; }
+.goa-proof-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.goa-proof-card { overflow: hidden; border: 1px solid rgba(141,222,255,.22); border-radius: 18px; background: linear-gradient(145deg, rgba(18,53,106,.78), rgba(4,15,43,.92)); box-shadow: 0 18px 50px rgba(0,0,0,.18); }
+.goa-proof-media { aspect-ratio: 16 / 9; display: grid; place-items: center; position: relative; overflow: hidden; background: radial-gradient(circle at 50% 35%, rgba(125,211,255,.18), transparent 52%), #061735; }
+.goa-proof-media::after { content: "PROOF OF WORK"; position: absolute; inset: auto 16px 14px; font-family: var(--font-display); font-size: 10px; letter-spacing: .16em; color: rgba(255,255,255,.5); }
+.goa-proof-media-mark { width: 58px; height: 58px; display: grid; place-items: center; border: 1px solid rgba(141,222,255,.45); border-radius: 50%; color: #8ee8ff; font-family: var(--font-display); font-size: 22px; }
+.goa-proof-body { padding: 22px; }
+.goa-proof-body > span { font-family: var(--font-display); color: #8ee8ff; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
+.goa-proof-body h4 { margin: 12px 0 10px; font-family: var(--font-display); font-size: clamp(1.45rem, 2.5vw, 2.25rem); font-weight: 400; line-height: .95; letter-spacing: -.05em; }
+.goa-proof-body p { margin: 0; color: #b5d1e8; font-size: .92rem; line-height: 1.58; }
+.goa-proof-result { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(141,222,255,.2); color: #f0f8ff; font-family: var(--font-display); font-size: 1.08rem; line-height: 1.05; }
+.goa-proof-link { display: inline-block; margin-top: 18px; padding-bottom: 5px; border-bottom: 1px solid #8ee8ff; color: #8ee8ff; font-size: .78rem; letter-spacing: .05em; }
+.goa-revenue { margin-top: 28px; padding: 28px; border: 1px solid rgba(141,222,255,.24); border-radius: 18px; background: linear-gradient(135deg, rgba(20,64,119,.55), rgba(5,17,47,.8)); }
+.goa-revenue span { display: block; font-family: var(--font-display); color: #8ee8ff; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+.goa-revenue strong { display: block; margin-top: 10px; font-family: var(--font-display); font-size: clamp(3.2rem, 7vw, 7rem); font-weight: 400; line-height: .8; letter-spacing: -.1em; }
+.goa-revenue p { max-width: 580px; margin: 18px 0 0; color: #b5d1e8; line-height: 1.55; }
+@media (max-width: 760px) { .goa-proof-grid { grid-template-columns: 1fr; } .goa-proof-body { padding: 18px; } .goa-revenue { padding: 22px; } }
