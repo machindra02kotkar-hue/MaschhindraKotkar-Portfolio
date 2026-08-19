@@ -17,7 +17,17 @@ export default function Home() {
       <main>
         <CinematicHero />
         <section className="question" id="about-me" aria-label="Portfolio introduction">
-          <p className="about-intro">
+          <p
+            className="about-intro"
+            style={{
+              fontSize: "clamp(.82rem, 1.35vw, 1.15rem)",
+              color: "#4f6a86",
+              fontWeight: 400,
+              lineHeight: 1.55,
+              marginBottom: "clamp(28px, 4vh, 46px)",
+              maxWidth: "680px",
+            }}
+          >
             Hi, I’m Maschhindra Kotkar — an MBA graduate and marketer with 2 years of experience, driven by one simple instinct: to make things better.
           </p>
           <p>Every chapter you are about to experience happened because I kept asking one question.</p>
