@@ -17,6 +17,9 @@ export default function Home() {
       <main>
         <CinematicHero />
         <section className="question" id="about-me" aria-label="Portfolio introduction">
+          <p className="about-intro">
+            Hi, I’m Maschhindra Kotkar — an MBA graduate and marketer with 2 years of experience, driven by one simple instinct: to make things better.
+          </p>
           <p>Every chapter you are about to experience happened because I kept asking one question.</p>
           <h2>How can this be done better?</h2>
           <p>That question changed my life.</p>
