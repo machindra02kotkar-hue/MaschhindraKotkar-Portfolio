@@ -21,36 +21,38 @@ export default function Home() {
           <h2>How can this be done better?</h2>
           <p>That question changed my life.</p>
         </section>
-        <Chapter2020 />
-        <ChapterLocalFoodMart />
-        <ChapterBoiMare />
-        <ChapterTopTrip />
-        <ChapterGoaTractors />
-        <ChapterMba />
-        <ChapterWildHeart />
-        <ChapterToday />
-<section className="next-chapter" id="contact">
-  <span id="resume">Let&apos;s connect</span>
-  <h2>Let&apos;s build something meaningful.</h2>
 
-<div className="contact-links">
-  <a
-    className="contact-link"
-    href="mailto:machindra02kotkar@gmail.com"
-  >
-    Email →
-  </a>
+        <div id="chapter-01"><Chapter2020 /></div>
+        <div id="chapter-02"><ChapterLocalFoodMart /></div>
+        <div id="chapter-03"><ChapterBoiMare /></div>
+        <div id="chapter-04"><ChapterTopTrip /></div>
+        <div id="chapter-05"><ChapterGoaTractors /></div>
+        <div id="chapter-06"><ChapterMba /></div>
+        <div id="chapter-07"><ChapterWildHeart /></div>
+        <div id="chapter-08"><ChapterToday /></div>
 
-  <a
-    className="contact-link"
-    href="https://wa.me/917448073402"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    WhatsApp →
-  </a>
-</div>
-</section>
+        <section className="next-chapter" id="contact">
+          <span id="resume">Let&apos;s connect</span>
+          <h2>Let&apos;s build something meaningful.</h2>
+
+          <div className="contact-links">
+            <a
+              className="contact-link"
+              href="mailto:machindra02kotkar@gmail.com"
+            >
+              Email →
+            </a>
+
+            <a
+              className="contact-link"
+              href="https://wa.me/917448073402"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp →
+            </a>
+          </div>
+        </section>
       </main>
     </SmoothScroll>
   );
