@@ -8,10 +8,22 @@ import { useRef } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 const galleryFiles = [
-  { src: "/industry-visit-1.webp", alt: "MBA group photo at Sainath Industries, Gujarat" },
-  { src: "/industry-visit-2.webp", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
-  { src: "/industry-visit-3.webp", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
-  { src: "/industry-visit-4.webp", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
+  {
+    src: "/industry/Industry1.jpeg",
+    alt: "MBA group photo at Sainath Industries, Gujarat",
+  },
+  {
+    src: "/industry/Industry2.jpeg",
+    alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat",
+  },
+  {
+    src: "/industry/Industry3.jpeg",
+    alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat",
+  },
+  {
+    src: "/industry/Industry4.jpeg",
+    alt: "MBA group photo at Aatapi Park, Vadodara, Gujarat",
+  },
 ];
 
 export function ChapterMba() {
