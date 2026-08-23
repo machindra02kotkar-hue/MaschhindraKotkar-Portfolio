@@ -8,10 +8,10 @@ import { useRef } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 const industryGallery = [
-  { src: "/industry-visit-1.webp", alt: "MBA group photo at Amul Butter Plant, Gujarat" },
-  { src: "/industry-visit-2.webp", alt: "MBA group photo at the Gujarat visit, Gujarat" },
-  { src: "/industry-visit-3.webp", alt: "MBA group photo at an industrial visit in Ahmedabad, Gujarat" },
-  { src: "/industry-visit-4.webp", alt: "MBA group photo at Sainath Industries, Gujarat" },
+  { src: "/Industry1.jpeg", alt: "MBA group photo at Sainath Industries, Gujarat" },
+  { src: "/Industry2.jpeg", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
+  { src: "/Industry3.jpeg", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
+  { src: "/Industry4.jpeg", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
 ];
 
 export function ChapterMba() {
@@ -36,11 +36,11 @@ export function ChapterMba() {
             <span className="mba-label">Industry visit / group moments</span>
             <span style={{ fontSize: "10px", letterSpacing: ".12em", color: "#7a65b8" }}>GUJARAT / 2025</span>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "10px", border: "1px solid rgba(70,52,100,.22)", boxShadow: "8px 8px 0 rgba(70,52,100,.10)", background: "#f8f4eb", padding: "10px" }}>
+          <div className="industry-photo-grid">
             {industryGallery.map((image) => (
-              <div key={image.src} style={{ overflow: "hidden", background: "#eee9df", border: "1px solid rgba(70,52,100,.12)" }}>
-                <img src={image.src} alt={image.alt} loading="lazy" style={{ display: "block", width: "100%", height: "auto" }} />
-              </div>
+              <figure key={image.src} className="industry-photo-card">
+                <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+              </figure>
             ))}
           </div>
         </div>
