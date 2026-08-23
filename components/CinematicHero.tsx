@@ -28,11 +28,13 @@ export function CinematicHero() {
         style={{
           position: "absolute",
           zIndex: 0,
-          width: "420px",
-          height: "180px",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "760px",
+          height: "300px",
           borderRadius: "50%",
-          background: "transparent",
-          boxShadow: "0 0 110px 38px rgba(45, 105, 220, 0.24)",
+          background: "radial-gradient(ellipse at center, rgba(45, 105, 220, 0.24) 0%, rgba(45, 105, 220, 0.16) 34%, rgba(45, 105, 220, 0.07) 58%, transparent 78%)",
           filter: "blur(18px)",
           pointerEvents: "none",
         }}
