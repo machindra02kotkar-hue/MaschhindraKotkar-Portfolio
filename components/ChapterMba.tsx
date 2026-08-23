@@ -3,19 +3,36 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const industryGallery = [
-  { src: "/industry-visit-1.webp", alt: "MBA group photo at Sainath Industries, Gujarat" },
-  { src: "/industry-visit-2.webp", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
-  { src: "/industry-visit-3.webp", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
-  { src: "/industry-visit-4.webp", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
+  { data: "/industry-data-final/1.txt", alt: "MBA group photo at Sainath Industries, Gujarat" },
+  { data: "/industry-data-final/2.txt", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
+  { data: "/industry-data-final/3.txt", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
+  { data: "/industry-data-final/4.txt", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
 ];
 
 export function ChapterMba() {
   const root = useRef<HTMLElement>(null);
+  const [gallerySources, setGallerySources] = useState<string[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all(
+      industryGallery.map(async (image) => {
+        const response = await fetch(image.data, { cache: "force-cache" });
+        if (!response.ok) throw new Error(`Failed to load ${image.data}`);
+        return `data:image/jpeg;base64,${(await response.text()).trim()}`;
+      })
+    ).then((sources) => {
+      if (!cancelled) setGallerySources(sources);
+    }).catch(() => {
+      if (!cancelled) setGallerySources([]);
+    });
+    return () => { cancelled = true; };
+  }, []);
 
   useGSAP(() => {
     const section = root.current;
@@ -37,9 +54,13 @@ export function ChapterMba() {
             <span style={{ fontSize: "10px", letterSpacing: ".12em", color: "#7a65b8" }}>GUJARAT / 2025</span>
           </div>
           <div className="industry-photo-grid">
-            {industryGallery.map((image) => (
-              <figure key={image.src} className="industry-photo-card">
-                <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+            {industryGallery.map((image, index) => (
+              <figure key={image.data} className="industry-photo-card">
+                {gallerySources[index] ? (
+                  <img src={gallerySources[index]} alt={image.alt} loading="lazy" decoding="async" />
+                ) : (
+                  <div aria-hidden="true" style={{ width: "100%", aspectRatio: "16 / 9" }} />
+                )}
               </figure>
             ))}
           </div>
