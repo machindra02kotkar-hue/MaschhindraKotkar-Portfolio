@@ -96,9 +96,8 @@ export function GoaProofOfWork() {
         </div>
         <div className={styles.revenue}>
           <span className={styles.revenueLabel}>Business Growth / During My Time at Goa Tractors</span>
-          <strong>₹8 Cr <em>→</em> ₹12 Cr</strong>
+          <strong>₹8 <span className={styles.cr}>Cr</span> <em>→</em> ₹12 <span className={styles.cr}>Cr</span></strong>
           <p>During my time at Goa Tractors, the company’s revenue grew from ₹8 crore to ₹12 crore.</p>
-          <div className={styles.revenueGraph} aria-hidden="true"><span /><i /><b /><em /></div>
         </div>
       </div>
       <div className={styles.archiveHeader}><span className={styles.archiveLine} /><span>CAMPAIGN ARCHIVE</span><span className={styles.archiveLine} /></div>
