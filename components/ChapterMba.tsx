@@ -3,44 +3,19 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const galleryFiles = [
-  { file: "1.txt", alt: "MBA group photo at Sainath Industries, Gujarat" },
-  { file: "2.txt", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
-  { file: "3.txt", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
-  { file: "4.txt", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
+  { src: "/industry-visit-1.webp", alt: "MBA group photo at Sainath Industries, Gujarat" },
+  { src: "/industry-visit-2.webp", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
+  { src: "/industry-visit-3.webp", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
+  { src: "/industry-visit-4.webp", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
 ];
 
 export function ChapterMba() {
   const root = useRef<HTMLElement>(null);
-  const [gallery, setGallery] = useState<string[]>([]);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    Promise.all(
-      galleryFiles.map(async ({ file }) => {
-        try {
-          const response = await fetch(`/industry-data-final/${file}`, { cache: "force-cache" });
-          if (!response.ok) throw new Error(`Failed to load ${file}`);
-          const base64 = (await response.text()).trim();
-          return `data:image/jpeg;base64,${base64}`;
-        } catch (error) {
-          console.error(`Industry gallery image failed: ${file}`, error);
-          return "";
-        }
-      })
-    ).then((images) => {
-      if (!cancelled) setGallery(images);
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   useGSAP(() => {
     const section = root.current;
@@ -87,18 +62,9 @@ export function ChapterMba() {
           </div>
 
           <div className="industry-photo-grid">
-            {galleryFiles.map((image, index) => (
-              <figure key={image.file} className="industry-photo-card">
-                {gallery[index] ? (
-                  <img
-                    src={gallery[index]}
-                    alt={image.alt}
-                    loading="eager"
-                    decoding="async"
-                  />
-                ) : (
-                  <span className="industry-photo-loading" aria-hidden="true" />
-                )}
+            {galleryFiles.map((image) => (
+              <figure key={image.src} className="industry-photo-card">
+                <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
               </figure>
             ))}
           </div>
