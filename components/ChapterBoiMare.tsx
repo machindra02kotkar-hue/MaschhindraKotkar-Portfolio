@@ -321,6 +321,20 @@ export function ChapterBoiMare() {
           justify-self: end;
         }
 
+        /* Keep the animated 5,000 counter at the large display size.
+           The generic .boi-stat span rule should only affect the label. */
+        .boi-stat .boi-counter {
+          display: inline-block;
+          font-size: inherit;
+          letter-spacing: inherit;
+          line-height: inherit;
+          font-family: inherit;
+        }
+
+        .boi-stat > span {
+          font-size: 0.83rem;
+        }
+
         @media (max-width: 900px) {
           .meme-stack {
             width: min(360px, 92vw);
