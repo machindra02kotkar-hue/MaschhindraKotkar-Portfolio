@@ -69,6 +69,26 @@ export function ChapterBoiMare() {
           scrub: true,
         },
       });
+
+      // Count the follower total up from 0 when it enters the viewport.
+      section.querySelectorAll<HTMLElement>(".boi-counter").forEach((counter) => {
+        const target = Number(counter.dataset.value || 0);
+        const progress = { value: 0 };
+
+        gsap.to(progress, {
+          value: target,
+          duration: 1.6,
+          ease: "power2.out",
+          onUpdate: () => {
+            counter.textContent = Math.round(progress.value).toLocaleString("en-IN");
+          },
+          scrollTrigger: {
+            trigger: counter,
+            start: "top 88%",
+            once: true,
+          },
+        });
+      });
     },
     { scope: root }
   );
@@ -99,7 +119,7 @@ export function ChapterBoiMare() {
         </div>
 
         <div className="meme-stack">
-          {memes.map((meme, index) => (
+          {memes.map((meme) => (
             <article className="meme-card" key={meme.id}>
               <div className="meme-card-header">
                 <span>BOI_MARE</span>
@@ -144,7 +164,7 @@ export function ChapterBoiMare() {
         />
 
         <div className="boi-stat">
-          <strong>5,000+</strong>
+          <strong><span className="boi-counter" data-value="5000">0</span>+</strong>
           <span>Followers reached</span>
         </div>
 
