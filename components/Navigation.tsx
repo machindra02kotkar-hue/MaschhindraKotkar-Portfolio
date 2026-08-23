@@ -14,7 +14,7 @@ const chapters = [
 export function Navigation() {
   return (
     <nav className="site-nav" aria-label="Primary navigation">
-      <a className="nav-mark" href="#top">M/</a>
+      <a className="nav-mark" href="#top">MK</a>
 
       <div className="nav-links">
         <a href="#about-me">About Me</a>
