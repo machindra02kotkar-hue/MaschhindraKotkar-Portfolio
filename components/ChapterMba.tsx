@@ -7,21 +7,27 @@ import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Load the original JPEGs directly from the public GitHub repository.
+// This avoids the Vercel static-asset path issue that was causing the
+// uploaded JPEGs to appear as broken images in production.
+const GITHUB_IMAGE_BASE =
+  "https://raw.githubusercontent.com/machindra02kotkar-hue/MaschhindraKotkar-Portfolio/main/public/industry";
+
 const galleryFiles = [
   {
-    src: "/industry/Industry1.jpeg",
+    src: `${GITHUB_IMAGE_BASE}/Industry1.jpeg`,
     alt: "MBA group photo at Sainath Industries, Gujarat",
   },
   {
-    src: "/industry/Industry2.jpeg",
+    src: `${GITHUB_IMAGE_BASE}/Industry2.jpeg`,
     alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat",
   },
   {
-    src: "/industry/Industry3.jpeg",
+    src: `${GITHUB_IMAGE_BASE}/Industry3.jpeg`,
     alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat",
   },
   {
-    src: "/industry/Industry4.jpeg",
+    src: `${GITHUB_IMAGE_BASE}/Industry4.jpeg`,
     alt: "MBA group photo at Aatapi Park, Vadodara, Gujarat",
   },
 ];
@@ -76,7 +82,15 @@ export function ChapterMba() {
           <div className="industry-photo-grid">
             {galleryFiles.map((image) => (
               <figure key={image.src} className="industry-photo-card">
-                <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(event) => {
+                    event.currentTarget.style.visibility = "hidden";
+                  }}
+                />
               </figure>
             ))}
           </div>
