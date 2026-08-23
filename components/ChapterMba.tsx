@@ -8,10 +8,10 @@ import { useEffect, useRef, useState } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 const galleryFiles = [
-  { file: "industry-1.jpg.b64", alt: "MBA group photo at Sainath Industries, Gujarat" },
-  { file: "industry-2.jpg.b64", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
-  { file: "industry-3.jpg.b64", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
-  { file: "industry-4.jpg.b64", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
+  { file: "1.txt", alt: "MBA group photo at Sainath Industries, Gujarat" },
+  { file: "2.txt", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
+  { file: "3.txt", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
+  { file: "4.txt", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
 ];
 
 export function ChapterMba() {
@@ -20,21 +20,22 @@ export function ChapterMba() {
 
   useEffect(() => {
     let cancelled = false;
+
     Promise.all(
       galleryFiles.map(async ({ file }) => {
-        const response = await fetch(`/industry-gallery/${file}`, { cache: "no-store" });
-        if (!response.ok) throw new Error(`Failed to load ${file}`);
-        const base64 = (await response.text()).trim();
-        return `data:image/jpeg;base64,${base64}`;
+        try {
+          const response = await fetch(`/industry-data-final/${file}`, { cache: "force-cache" });
+          if (!response.ok) throw new Error(`Failed to load ${file}`);
+          const base64 = (await response.text()).trim();
+          return `data:image/jpeg;base64,${base64}`;
+        } catch (error) {
+          console.error(`Industry gallery image failed: ${file}`, error);
+          return "";
+        }
       })
-    )
-      .then((images) => {
-        if (!cancelled) setGallery(images);
-      })
-      .catch((error) => {
-        console.error("Industry gallery failed to load", error);
-        if (!cancelled) setGallery([]);
-      });
+    ).then((images) => {
+      if (!cancelled) setGallery(images);
+    });
 
     return () => {
       cancelled = true;
@@ -78,56 +79,25 @@ export function ChapterMba() {
         <p>Leading an industrial tour meant coordinating people, permissions, travel, and real-world learning—not just arranging a trip.</p>
       </div>
 
-      <div>
+      <div className="tour-gallery-column">
         <div className="tour-gallery" style={{ marginBottom: "clamp(28px, 4vw, 46px)" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+          <div className="tour-gallery-heading">
             <span className="mba-label">Industry visit / group moments</span>
-            <span style={{ fontSize: "10px", letterSpacing: ".12em", color: "#7a65b8" }}>GUJARAT / 2025</span>
+            <span>GUJARAT / 2025</span>
           </div>
 
-          <div
-            className="industry-photo-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-              gap: "10px",
-              border: "1px solid rgba(70,52,100,.22)",
-              boxShadow: "8px 8px 0 rgba(70,52,100,.10)",
-              background: "#f8f4eb",
-              padding: "10px",
-            }}
-          >
+          <div className="industry-photo-grid">
             {galleryFiles.map((image, index) => (
-              <figure
-                key={image.file}
-                className="industry-photo-card"
-                style={{
-                  margin: 0,
-                  overflow: "hidden",
-                  height: "clamp(150px, 18vw, 260px)",
-                  background: "#eee9df",
-                  border: "1px solid rgba(39,31,63,.18)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <figure key={image.file} className="industry-photo-card">
                 {gallery[index] ? (
                   <img
                     src={gallery[index]}
                     alt={image.alt}
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      display: "block",
-                      objectFit: "contain",
-                      objectPosition: "center",
-                    }}
                   />
                 ) : (
-                  <span aria-hidden="true" style={{ width: "100%", height: "100%" }} />
+                  <span className="industry-photo-loading" aria-hidden="true" />
                 )}
               </figure>
             ))}
