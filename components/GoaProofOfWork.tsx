@@ -74,11 +74,30 @@ export function GoaProofOfWork() {
     if (!section) return;
     gsap.from(section.querySelectorAll(`.${styles.intro} > *`), { y: 50, opacity: 0, duration: 0.9, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: section, start: "top 78%", toggleActions: "play none none reverse" } });
     const revenue = section.querySelector(`.${styles.revenue}`);
-    const revenueNumber = section.querySelector(`.${styles.revenue} > strong`);
     if (revenue) {
       gsap.from(revenue, { y: 70, x: 70, opacity: 0, scale: 0.94, duration: 1.1, ease: "power3.out", scrollTrigger: { trigger: revenue, start: "top 82%", toggleActions: "play none none reverse" } });
-      if (revenueNumber) gsap.from(revenueNumber, { y: 35, opacity: 0, delay: 0.15, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: revenue, start: "top 82%", toggleActions: "play none none reverse" } });
     }
+
+    // Count the revenue figures up from 0 when the revenue card enters the viewport.
+    section.querySelectorAll<HTMLElement>(`.${styles.revenue} .revenue-counter`).forEach((counter) => {
+      const target = Number(counter.dataset.value || 0);
+      const progress = { value: 0 };
+
+      gsap.to(progress, {
+        value: target,
+        duration: 1.6,
+        ease: "power2.out",
+        onUpdate: () => {
+          counter.textContent = String(Math.round(progress.value));
+        },
+        scrollTrigger: {
+          trigger: counter,
+          start: "top 88%",
+          once: true,
+        },
+      });
+    });
+
     gsap.from(section.querySelectorAll(`.${styles.card}`), { y: 90, opacity: 0, rotate: (index: number) => index % 2 === 0 ? -1.2 : 1.2, stagger: 0.12, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: section.querySelector(`.${styles.grid}`), start: "top 84%", toggleActions: "play none none reverse" } });
     section.querySelectorAll(`.${styles.card}`).forEach((card) => {
       const visual = card.querySelector(`.${styles.proofMedia}`);
@@ -96,7 +115,7 @@ export function GoaProofOfWork() {
         </div>
         <div className={styles.revenue}>
           <span className={styles.revenueLabel}>Business Growth / During My Time at Goa Tractors</span>
-          <strong>₹8 <span className={styles.cr}>Cr</span> <em>→</em> ₹12 <span className={styles.cr}>Cr</span></strong>
+          <strong><span className="revenue-counter" data-value="8">0</span> <span className={styles.cr}>Cr</span> <em>→</em> <span className="revenue-counter" data-value="12">0</span> <span className={styles.cr}>Cr</span></strong>
           <p>During my time at Goa Tractors, the company’s revenue grew from ₹8 crore to ₹12 crore.</p>
         </div>
       </div>
