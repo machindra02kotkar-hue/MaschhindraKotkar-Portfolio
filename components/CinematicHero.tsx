@@ -34,7 +34,8 @@ export function CinematicHero() {
           width: "760px",
           height: "300px",
           borderRadius: "50%",
-          background: "radial-gradient(ellipse at center, rgba(45, 105, 220, 0.24) 0%, rgba(45, 105, 220, 0.16) 34%, rgba(45, 105, 220, 0.07) 58%, transparent 78%)",
+          background: "rgba(45, 105, 220, 0.10)",
+          boxShadow: "0 0 120px 80px rgba(45, 105, 220, 0.16), 0 0 220px 120px rgba(45, 105, 220, 0.08)",
           filter: "blur(18px)",
           pointerEvents: "none",
         }}
