@@ -7,30 +7,26 @@ import { useEffect, useRef, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const industryGallery = [
-  { position: "0% 0%", alt: "MBA group photo at Sainath Industries, Gujarat" },
-  { position: "100% 0%", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
-  { position: "0% 100%", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
-  { position: "100% 100%", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
+const galleryFiles = [
+  { file: "1.txt", alt: "MBA group photo at Sainath Industries, Gujarat" },
+  { file: "2.txt", alt: "MBA group photo at the Gujarat visit, Gujarat" },
+  { file: "3.txt", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
+  { file: "4.txt", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
 ];
 
 export function ChapterMba() {
   const root = useRef<HTMLElement>(null);
-  const [gallerySource, setGallerySource] = useState<string>("");
+  const [gallery, setGallery] = useState<string[]>([]);
 
   useEffect(() => {
     let cancelled = false;
-    fetch("/industry-gallery.b64", { cache: "no-store" })
-      .then((response) => {
-        if (!response.ok) throw new Error("Failed to load industry gallery");
-        return response.text();
-      })
-      .then((base64) => {
-        if (!cancelled) setGallerySource(`data:image/jpeg;base64,${base64.trim()}`);
-      })
-      .catch(() => {
-        if (!cancelled) setGallerySource("");
-      });
+    Promise.all(galleryFiles.map(async ({ file }) => {
+      const response = await fetch(`/industry-data-final/${file}`, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Failed to load ${file}`);
+      return `data:image/jpeg;base64,${(await response.text()).trim()}`;
+    }))
+      .then((images) => { if (!cancelled) setGallery(images); })
+      .catch(() => { if (!cancelled) setGallery([]); });
     return () => { cancelled = true; };
   }, []);
 
@@ -54,17 +50,9 @@ export function ChapterMba() {
             <span style={{ fontSize: "10px", letterSpacing: ".12em", color: "#7a65b8" }}>GUJARAT / 2025</span>
           </div>
           <div className="industry-photo-grid">
-            {industryGallery.map((image) => (
-              <figure key={image.alt} className="industry-photo-card" style={{ margin: 0, overflow: "hidden", aspectRatio: "16 / 9", background: "#eee9df", border: "1px solid rgba(39,31,63,.18)", boxShadow: "10px 10px 0 rgba(39,31,63,.10)" }}>
-                {gallerySource ? (
-                  <div
-                    role="img"
-                    aria-label={image.alt}
-                    style={{ width: "100%", height: "100%", backgroundImage: `url(${gallerySource})`, backgroundRepeat: "no-repeat", backgroundSize: "200% 200%", backgroundPosition: image.position, backgroundColor: "#eee9df" }}
-                  />
-                ) : (
-                  <div aria-hidden="true" style={{ width: "100%", height: "100%" }} />
-                )}
+            {galleryFiles.map((image, index) => (
+              <figure key={image.file} className="industry-photo-card" style={{ margin: 0, overflow: "hidden", aspectRatio: "16 / 9", background: "#eee9df", border: "1px solid rgba(39,31,63,.18)", boxShadow: "10px 10px 0 rgba(39,31,63,.10)" }}>
+                {gallery[index] && <img src={gallery[index]} alt={image.alt} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", display: "block", objectFit: "cover", objectPosition: "center", filter: "contrast(1.04) saturate(1.03)" }} />}
               </figure>
             ))}
           </div>
