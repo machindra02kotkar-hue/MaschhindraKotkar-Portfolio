@@ -41,16 +41,38 @@ export function ChapterMba() {
   useGSAP(() => {
     const section = root.current;
     if (!section) return;
+
     gsap.from(section.querySelectorAll(".mba-label, .mba-title, .mba-copy, .rank-card, .tour-gallery, .tour-stat, .mba-quote"), {
       y: 45,
       opacity: 0,
       stagger: 0.1,
       scrollTrigger: { trigger: section, start: "top 70%", end: "top 25%", scrub: true },
     });
+
     gsap.to(section.querySelector(".mba-pin"), {
       y: 22,
       rotate: 4,
       scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: true },
+    });
+
+    // Count the MBA tour statistics up from 0 when they enter the viewport.
+    section.querySelectorAll<HTMLElement>(".tour-counter").forEach((counter) => {
+      const target = Number(counter.dataset.value || 0);
+      const progress = { value: 0 };
+
+      gsap.to(progress, {
+        value: target,
+        duration: 1.6,
+        ease: "power2.out",
+        onUpdate: () => {
+          counter.textContent = String(Math.round(progress.value));
+        },
+        scrollTrigger: {
+          trigger: counter,
+          start: "top 88%",
+          once: true,
+        },
+      });
     });
   }, { scope: root });
 
@@ -112,9 +134,9 @@ export function ChapterMba() {
         </div>
 
         <div className="tour-stats">
-          <div className="tour-stat"><strong>26</strong><span>Students</span></div>
-          <div className="tour-stat"><strong>4</strong><span>Industries</span></div>
-          <div className="tour-stat"><strong>6</strong><span>Days</span></div>
+          <div className="tour-stat"><strong className="tour-counter" data-value="26">0</strong><span>Students</span></div>
+          <div className="tour-stat"><strong className="tour-counter" data-value="4">0</strong><span>Industries</span></div>
+          <div className="tour-stat"><strong className="tour-counter" data-value="6">0</strong><span>Days</span></div>
         </div>
       </div>
     </div>
