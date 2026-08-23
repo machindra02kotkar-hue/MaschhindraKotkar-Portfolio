@@ -8,10 +8,10 @@ import { useRef } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 const industryGallery = [
-  { src: "/Industry1.jpeg", alt: "MBA group photo at Sainath Industries, Gujarat" },
-  { src: "/Industry2.jpeg", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
-  { src: "/Industry3.jpeg", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
-  { src: "/Industry4.jpeg", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
+  { src: "/Industry1.jpeg", fallback: "/industry-visit-1.webp", alt: "MBA group photo at Sainath Industries, Gujarat" },
+  { src: "/Industry2.jpeg", fallback: "/industry-visit-2.webp", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
+  { src: "/Industry3.jpeg", fallback: "/industry-visit-3.webp", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
+  { src: "/Industry4.jpeg", fallback: "/industry-visit-4.webp", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
 ];
 
 export function ChapterMba() {
@@ -39,7 +39,7 @@ export function ChapterMba() {
           <div className="industry-photo-grid">
             {industryGallery.map((image) => (
               <figure key={image.src} className="industry-photo-card">
-                <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+                <img src={image.src} alt={image.alt} loading="lazy" decoding="async" onError={(event) => { const img = event.currentTarget; if (img.src.endsWith(image.src)) img.src = image.fallback; }} />
               </figure>
             ))}
           </div>
