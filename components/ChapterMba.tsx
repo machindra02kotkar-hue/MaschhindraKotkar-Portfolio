@@ -8,29 +8,29 @@ import { useEffect, useRef, useState } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 const industryGallery = [
-  { data: "/industry-data-final/1.txt", alt: "MBA group photo at Sainath Industries, Gujarat" },
-  { data: "/industry-data-final/2.txt", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
-  { data: "/industry-data-final/3.txt", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
-  { data: "/industry-data-final/4.txt", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
+  { position: "0% 0%", alt: "MBA group photo at Sainath Industries, Gujarat" },
+  { position: "100% 0%", alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
+  { position: "0% 100%", alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
+  { position: "100% 100%", alt: "MBA group photo at the Gujarat visit, Vadodara, Gujarat" },
 ];
 
 export function ChapterMba() {
   const root = useRef<HTMLElement>(null);
-  const [gallerySources, setGallerySources] = useState<string[]>([]);
+  const [gallerySource, setGallerySource] = useState<string>("");
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all(
-      industryGallery.map(async (image) => {
-        const response = await fetch(image.data, { cache: "force-cache" });
-        if (!response.ok) throw new Error(`Failed to load ${image.data}`);
-        return `data:image/jpeg;base64,${(await response.text()).trim()}`;
+    fetch("/industry-gallery.b64", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Failed to load industry gallery");
+        return response.text();
       })
-    ).then((sources) => {
-      if (!cancelled) setGallerySources(sources);
-    }).catch(() => {
-      if (!cancelled) setGallerySources([]);
-    });
+      .then((base64) => {
+        if (!cancelled) setGallerySource(`data:image/jpeg;base64,${base64.trim()}`);
+      })
+      .catch(() => {
+        if (!cancelled) setGallerySource("");
+      });
     return () => { cancelled = true; };
   }, []);
 
@@ -54,12 +54,16 @@ export function ChapterMba() {
             <span style={{ fontSize: "10px", letterSpacing: ".12em", color: "#7a65b8" }}>GUJARAT / 2025</span>
           </div>
           <div className="industry-photo-grid">
-            {industryGallery.map((image, index) => (
-              <figure key={image.data} className="industry-photo-card">
-                {gallerySources[index] ? (
-                  <img src={gallerySources[index]} alt={image.alt} loading="lazy" decoding="async" />
+            {industryGallery.map((image) => (
+              <figure key={image.alt} className="industry-photo-card" style={{ margin: 0, overflow: "hidden", aspectRatio: "16 / 9", background: "#eee9df", border: "1px solid rgba(39,31,63,.18)", boxShadow: "10px 10px 0 rgba(39,31,63,.10)" }}>
+                {gallerySource ? (
+                  <div
+                    role="img"
+                    aria-label={image.alt}
+                    style={{ width: "100%", height: "100%", backgroundImage: `url(${gallerySource})`, backgroundRepeat: "no-repeat", backgroundSize: "200% 200%", backgroundPosition: image.position, backgroundColor: "#eee9df" }}
+                  />
                 ) : (
-                  <div aria-hidden="true" style={{ width: "100%", aspectRatio: "16 / 9" }} />
+                  <div aria-hidden="true" style={{ width: "100%", height: "100%" }} />
                 )}
               </figure>
             ))}
