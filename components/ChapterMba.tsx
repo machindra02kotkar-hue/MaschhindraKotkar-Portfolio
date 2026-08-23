@@ -8,29 +8,32 @@ import { useRef } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 // Load the original JPEGs directly from the public GitHub repository.
-// This avoids the Vercel static-asset path issue that was causing the
-// uploaded JPEGs to appear as broken images in production.
 const GITHUB_IMAGE_BASE =
   "https://raw.githubusercontent.com/machindra02kotkar-hue/MaschhindraKotkar-Portfolio/main/public/industry";
 
 const galleryFiles = [
-  {
-    src: `${GITHUB_IMAGE_BASE}/Industry1.jpeg`,
-    alt: "MBA group photo at Sainath Industries, Gujarat",
-  },
-  {
-    src: `${GITHUB_IMAGE_BASE}/Industry2.jpeg`,
-    alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat",
-  },
-  {
-    src: `${GITHUB_IMAGE_BASE}/Industry3.jpeg`,
-    alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat",
-  },
-  {
-    src: `${GITHUB_IMAGE_BASE}/Industry4.jpeg`,
-    alt: "MBA group photo at Aatapi Park, Vadodara, Gujarat",
-  },
+  { src: `${GITHUB_IMAGE_BASE}/Industry1.jpeg`, alt: "MBA group photo at Sainath Industries, Gujarat" },
+  { src: `${GITHUB_IMAGE_BASE}/Industry2.jpeg`, alt: "MBA group photo at Kruti Industries, Ahmedabad, Gujarat" },
+  { src: `${GITHUB_IMAGE_BASE}/Industry3.jpeg`, alt: "MBA group photo at Amul Butter Plant, Gandhinagar, Gujarat" },
+  { src: `${GITHUB_IMAGE_BASE}/Industry4.jpeg`, alt: "MBA group photo at Aatapi Park, Vadodara, Gujarat" },
 ];
+
+const rankSupStyle = {
+  display: "inline-block",
+  marginLeft: "0.14em",
+  fontSize: "0.42em",
+  lineHeight: 1,
+  verticalAlign: "super",
+  fontWeight: 700,
+  letterSpacing: "0.03em",
+};
+
+const projectNameStyle = {
+  marginTop: "14px",
+  paddingTop: "12px",
+  borderTop: "1px solid rgba(105, 77, 180, .35)",
+  color: "#6b4bb5",
+};
 
 export function ChapterMba() {
   const root = useRef<HTMLElement>(null);
@@ -60,8 +63,20 @@ export function ChapterMba() {
     </div>
 
     <div className="rank-grid">
-      <article className="rank-card"><span>TEAM PROJECT</span><strong>1<sup>st</sup></strong><p>out of 7 teams</p></article>
-      <article className="rank-card"><span>TEAM PROJECT</span><strong>1<sup>st</sup></strong><p>out of 10 teams</p></article>
+      <article className="rank-card">
+        <span>TEAM PROJECT</span>
+        <strong>1<sup style={rankSupStyle}>st</sup></strong>
+        <p>out of 7 teams</p>
+        <p style={projectNameStyle}>in Data Analysis Project</p>
+      </article>
+
+      <article className="rank-card">
+        <span>TEAM PROJECT</span>
+        <strong>1<sup style={rankSupStyle}>st</sup></strong>
+        <p>out of 10 teams</p>
+        <p style={projectNameStyle}>in Marketing Project</p>
+      </article>
+
       <div className="sticky-note">LEADERSHIP<br />IS A TEAM<br />SPORT</div>
     </div>
 
