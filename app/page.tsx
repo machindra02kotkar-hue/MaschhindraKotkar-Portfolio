@@ -7,12 +7,14 @@ import { ChapterWildHeart } from "@/components/ChapterWildHeart";
 import { ChapterToday } from "@/components/ChapterToday";
 import { ChapterTopTrip } from "@/components/ChapterTipTrip";
 import { CinematicHero } from "@/components/CinematicHero";
+import { CursorGlow } from "@/components/CursorGlow";
 import { Navigation } from "@/components/Navigation";
 import { SmoothScroll } from "@/components/SmoothScroll";
 
 export default function Home() {
   return (
     <SmoothScroll>
+      <CursorGlow />
       <Navigation />
       <main>
         <CinematicHero />
