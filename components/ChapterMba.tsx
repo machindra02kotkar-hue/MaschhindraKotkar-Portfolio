@@ -3,20 +3,19 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const industryGallery = [
+  { src: "/industry-visit-1.webp", alt: "MBA group photo at Amul Butter Plant, Gujarat" },
+  { src: "/industry-visit-2.webp", alt: "MBA group photo at the Gujarat visit, Gujarat" },
+  { src: "/industry-visit-3.webp", alt: "MBA group photo at an industrial visit in Ahmedabad, Gujarat" },
+  { src: "/industry-visit-4.webp", alt: "MBA group photo at Sainath Industries, Gujarat" },
+];
+
 export function ChapterMba() {
   const root = useRef<HTMLElement>(null);
-  const [industryGallery, setIndustryGallery] = useState("");
-
-  useEffect(() => {
-    fetch("/industry-gallery.b64")
-      .then((response) => response.text())
-      .then((base64) => setIndustryGallery(`data:image/webp;base64,${base64.trim()}`))
-      .catch(() => setIndustryGallery(""));
-  }, []);
 
   useGSAP(() => {
     const section = root.current;
@@ -37,8 +36,12 @@ export function ChapterMba() {
             <span className="mba-label">Industry visit / group moments</span>
             <span style={{ fontSize: "10px", letterSpacing: ".12em", color: "#7a65b8" }}>GUJARAT / 2025</span>
           </div>
-          <div style={{ overflow: "hidden", border: "1px solid rgba(70,52,100,.22)", boxShadow: "8px 8px 0 rgba(70,52,100,.10)", background: "#f8f4eb", minHeight: "220px" }}>
-            {industryGallery ? <img src={industryGallery} alt="Four clear group photos from the MBA industrial visit to Gujarat" style={{ display: "block", width: "100%", height: "auto" }} /> : null}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "10px", border: "1px solid rgba(70,52,100,.22)", boxShadow: "8px 8px 0 rgba(70,52,100,.10)", background: "#f8f4eb", padding: "10px" }}>
+            {industryGallery.map((image) => (
+              <div key={image.src} style={{ overflow: "hidden", background: "#eee9df", border: "1px solid rgba(70,52,100,.12)" }}>
+                <img src={image.src} alt={image.alt} loading="lazy" style={{ display: "block", width: "100%", height: "auto" }} />
+              </div>
+            ))}
           </div>
         </div>
         <div className="tour-stats"><div className="tour-stat"><strong>26</strong><span>Students</span></div><div className="tour-stat"><strong>4</strong><span>Industries</span></div><div className="tour-stat"><strong>6</strong><span>Days</span></div></div>
