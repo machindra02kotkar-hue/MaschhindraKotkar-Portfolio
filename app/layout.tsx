@@ -13,8 +13,30 @@ const display = DM_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: 
 const body = Manrope({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://maschhindra-kotkar-portfolio.vercel.app"),
   title: "Maschhindra — The Story of a Problem Solver",
   description: "A cinematic portfolio by Maschhindra.",
+  openGraph: {
+    title: "Maschhindra — The Story of a Problem Solver",
+    description: "A cinematic portfolio by Maschhindra.",
+    url: "https://maschhindra-kotkar-portfolio.vercel.app",
+    siteName: "Maschhindra",
+    type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Maschhindra — The Story of a Problem Solver",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Maschhindra — The Story of a Problem Solver",
+    description: "A cinematic portfolio by Maschhindra.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -45,7 +67,7 @@ return (
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
       t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "y15195knb8");
+    })(window, document, "clarity", "script", "clarity", "y15195knb8");
   `}
 </Script>
 
